@@ -4,10 +4,13 @@ export type Categories = {
 }
 
 export type Meals = {
+    [x: string]: any
     meals: Array<MealDB>
 }
 
 export type MealDB = {
+    id: number
+    favorite: boolean
     idMeal: string
     strMeal: string
     strMealAlternate: any

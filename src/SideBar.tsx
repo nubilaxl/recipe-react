@@ -1,18 +1,49 @@
 
 import RecipeThumb from "./RecipeThumb";
-import type {Meals} from "./Data-types";
+import type {MealDB} from "./Data-types";
 //import meal from "./assets/recipes-mealdb.json"
 //let meals = meal.meals
 
+type SideBarProps = {
+    recipes: Array<MealDB>
+    selectedRecipeId: number
+    deleteRecipe: (id: number) => void
+    setSelectedRecipeId: (newValue: number) => void
+    toggleDelete: boolean
+    updateRecipeFavorite: (id: number) => void
+    
+}
 
+export default function SideBar({
+    recipes,
+    selectedRecipeId,
+    deleteRecipe,
+    setSelectedRecipeId,
+    toggleDelete,
+    updateRecipeFavorite
 
-export default function SideBar({meals}:Meals
+}: SideBarProps
     
 ) {
-        return (<div className="sidebar  container  row col-md-9"    >SideBar
-            {...meals.map(r => <RecipeThumb key={r.idMeal} recipe = {r} />
-                
+       
+        // This function is used for highlighting the selected recipe in the sidebar
+        const handleRecipeClick = (id: number) => {
+            setSelectedRecipeId(id)
+        }
 
+        return (<div className="sidebar  container  row col"    >SideBar
+            {...recipes.map(r => (<RecipeThumb 
+                        key={r.id} 
+                        recipe = {r} 
+                        onSelected = {handleRecipeClick}
+                        isSelected ={r.id === selectedRecipeId}
+                        deleteRecipe={deleteRecipe}
+                        toggleDelete={toggleDelete}
+                        updateRecipeFavorite = {updateRecipeFavorite}
+                        
+                        />
+                
+            )
 
             )
             
