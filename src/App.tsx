@@ -46,6 +46,19 @@ export default function App() {
        
     }
 
+    // This function is a all-purpose function for updating properties
+    const updateRecipe = (property: string, newValue: string, idToUpdate?: number) => {
+        if (idToUpdate === undefined) {
+        return
+        }
+        setRecipes(currentRecipes => currentRecipes.map(recipe => (
+            recipe.id !== idToUpdate ? recipe : {
+            ...recipe,
+            [property]: newValue
+        }
+        )))
+    }
+
     // This function uses the selectedRecipeId state variable to find it
     // among the id's in all the recipes and returns an individual recipe
     // object to selectedRecipe. The returned object is used to pass as a data
@@ -131,6 +144,8 @@ export default function App() {
       addNewRecipe={addNewRecipe}
       handleDeleteToggleButtonClick={handleDeleteToggleButtonClick}
       toggleDelete={toggleDelete}
+      updateRecipe={updateRecipe}
+      selectedRecipe={selectedRecipe}
       />
       <div className="row "  ><div className="col-sm-4  border" >
         <SideBar
@@ -148,6 +163,7 @@ export default function App() {
       <div className="col border"  ><RecipeView
          //{...mealData.meals[0]}
          selectedRecipe = {selectedRecipe}
+         
      
       
       /></div></div></div>

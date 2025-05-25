@@ -3,11 +3,14 @@ import type {MealDB} from "./Data-types";
 
 type RecipeViewProps = {
     selectedRecipe?: MealDB
+    
 }
 
 // This function is the JSX to show the Recipe view of the selected recipe.
 export default function RecipeView(
-    {selectedRecipe}: RecipeViewProps
+    {selectedRecipe,
+     
+    }: RecipeViewProps
  
 ) {
         return <div>RecipeView
