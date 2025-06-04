@@ -5,7 +5,8 @@ import blankThumbnail from "./assets/blank-thumbnail.jpeg"
 
 
 type Props = {
-    updateRecipe: (property: string, value: string, id?: number) => void
+    updateRecipe: (property: string, value: any, id?: number) => void
+    updateBackend : (recipeValues: MealDB, id?: number) => void
     selectedRecipe?: MealDB
     handleClose: () => void
 }
@@ -14,14 +15,22 @@ type Props = {
 export default function RecipeForm({
     updateRecipe,
     selectedRecipe,
+    updateBackend,
     handleClose
 }: Props) {
     
     let [count, setCount] = useState(1);
     const [moreIngredients, setMoreIngredients] = useState(false)
     const [formValues, setFormValues] = useState({
+        favorite: selectedRecipe?.favorite || false,
+        idMeal: selectedRecipe?.idMeal || selectedRecipe?.id, 
+        strMealAlternate: selectedRecipe?.strMealAlternate || "",
+        strCategory: selectedRecipe?.strCategory || "",
+        strArea: selectedRecipe?.strArea || "",
         strMeal: selectedRecipe?.strMeal || "",
         strMealThumb: selectedRecipe?.strMealThumb || blankThumbnail,
+        strTags: selectedRecipe?.strTags || "",
+        strYoutube: selectedRecipe?.strYoutube || "",
         strMeasure1: selectedRecipe?.strMeasure1  || "",
         strIngredient1: selectedRecipe?.strIngredient1 || "",
         strMeasure2: selectedRecipe?.strMeasure2 || "", 
@@ -62,8 +71,11 @@ export default function RecipeForm({
         strIngredient19: selectedRecipe?.strIngredient19 || "",
         strMeasure20: selectedRecipe?.strMeasure20 || "",
         strIngredient20: selectedRecipe?.strIngredient20 || "",
-        strInstructions: selectedRecipe?.strInstructions || ""
-                
+        strInstructions: selectedRecipe?.strInstructions || "",
+        strSource: selectedRecipe?.strSource || "",
+        strImageSource: selectedRecipe?.strImageSource || "",
+        strCreativeCommonsConfirmed: selectedRecipe?.strCreativeCommonsConfirmed || "",
+        dateModified: selectedRecipe?.dateModified || new Date()        
     })
 
     const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => 
@@ -75,6 +87,13 @@ export default function RecipeForm({
     const handleSubmit = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
         
+        updateRecipe("favorite", formValues.favorite, selectedRecipe?.id )
+        updateRecipe("idMeal", formValues.idMeal, selectedRecipe?.id  )
+        updateRecipe("strMealAlternate", formValues.strMealAlternate, selectedRecipe?.id  )
+        updateRecipe("strCategory", formValues.strCategory, selectedRecipe?.id  )
+        updateRecipe("strArea", formValues.strArea, selectedRecipe?.id  )
+        updateRecipe("strTags", formValues.strTags, selectedRecipe?.id  )
+        updateRecipe("strYoutube", formValues.strYoutube, selectedRecipe?.id  )
         updateRecipe("strIngredient1", formValues.strIngredient1, selectedRecipe?.id)
         updateRecipe("strIngredient2", formValues.strIngredient2, selectedRecipe?.id)
         updateRecipe("strIngredient3", formValues.strIngredient3, selectedRecipe?.id)
@@ -118,6 +137,74 @@ export default function RecipeForm({
         updateRecipe("strMeal", formValues.strMeal, selectedRecipe?.id)
         updateRecipe("strMealThumb", formValues.strMealThumb, selectedRecipe?.id)
         updateRecipe("strInstructions", formValues.strInstructions, selectedRecipe?.id)
+        updateRecipe("strSource", formValues.strSource, selectedRecipe?.id  )
+        updateRecipe("strImageSource", formValues.strImageSource, selectedRecipe?.id  )
+        updateRecipe("strCreativeCommonsConfirmed", formValues.strCreativeCommonsConfirmed, selectedRecipe?.id  )
+        updateRecipe("dateModified", formValues.dateModified, selectedRecipe?.id )
+        
+        if (selectedRecipe === undefined)
+            return
+        else
+        {
+             
+        updateBackend({...selectedRecipe, favorite: selectedRecipe.favorite,
+            strMeasure1: formValues.strMeasure1,
+            strIngredient1: formValues.strIngredient1,
+            strMeal: formValues.strMeal,
+            strMealAlternate: formValues.strMealAlternate,
+            strCategory: formValues.strCategory,
+            strArea: formValues.strCategory,
+            strInstructions: formValues.strInstructions,
+            strMealThumb: formValues.strMealThumb,
+            strTags: formValues.strTags,
+            strYoutube: formValues.strYoutube,
+            strIngredient2: formValues.strIngredient2,
+            strIngredient3: formValues.strIngredient3,
+            strIngredient4: formValues.strIngredient4,
+            strIngredient5: formValues.strIngredient5,
+            strIngredient6: formValues.strIngredient6,
+            strIngredient7: formValues.strIngredient7,
+            strIngredient8: formValues.strIngredient8,
+            strIngredient9: formValues.strIngredient9,
+            strIngredient10: formValues.strIngredient10,
+            strIngredient11: formValues.strIngredient11,
+            strIngredient12: formValues.strIngredient12,
+            strIngredient13: formValues.strIngredient13,
+            strIngredient14: formValues.strIngredient14,
+            strIngredient15: formValues.strIngredient15,
+            strIngredient16: formValues.strIngredient16,
+            strIngredient17: formValues.strIngredient17,
+            strIngredient18: formValues.strIngredient18,
+            strIngredient19: formValues.strIngredient19,
+            strIngredient20: formValues.strIngredient20,
+            
+            strMeasure2: formValues.strMeasure2,
+            strMeasure3: formValues.strMeasure3,
+            strMeasure4: formValues.strMeasure4,
+            strMeasure5: formValues.strMeasure5,
+            strMeasure6: formValues.strMeasure6,
+            strMeasure7: formValues.strMeasure7,
+            strMeasure8: formValues.strMeasure8,
+            strMeasure9: formValues.strMeasure9,
+            strMeasure10: formValues.strMeasure10,
+            strMeasure11: formValues.strMeasure11,
+            strMeasure12: formValues.strMeasure12,
+            strMeasure13: formValues.strMeasure13,
+            strMeasure14: formValues.strMeasure14,
+            strMeasure15: formValues.strMeasure15,
+            strMeasure16: formValues.strMeasure16,
+            strMeasure17: formValues.strMeasure17,
+            strMeasure18: formValues.strMeasure18,
+            strMeasure19: formValues.strMeasure19,
+            strMeasure20: formValues.strMeasure20,
+            strSource: formValues.strSource,
+            strImageSource: formValues.strImageSource,
+            strCreativeCommonsConfirmed: formValues.strCreativeCommonsConfirmed,
+            dateModified: formValues.dateModified
+        }, selectedRecipe.id)
+        
+        }
+        //    updateBackend(selectedRecipe, selectedRecipe?.id)
         handleClose()
     }
 

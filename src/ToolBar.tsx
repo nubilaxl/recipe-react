@@ -7,7 +7,8 @@ import {Modal} from "react-bootstrap"
 type ToolBarProps = {
     addNewRecipe: () => void
     handleDeleteToggleButtonClick: () => void
-    updateRecipe : (property: string, newValue: string, idToUpdate?: number) => void
+    updateBackend : (recipeValues: MealDB, id?: number) => void
+    updateRecipe : (property: string, newValue: any, idToUpdate?: number) => void
     selectedRecipe?: MealDB
     toggleDelete: boolean
 }
@@ -18,6 +19,7 @@ export default function ToolBar({
         addNewRecipe,
         handleDeleteToggleButtonClick,
         updateRecipe,
+        updateBackend,
         selectedRecipe,
         toggleDelete
 }: ToolBarProps) {
@@ -42,6 +44,7 @@ export default function ToolBar({
                 <Modal.Body>
                     <RecipeForm
                         updateRecipe={updateRecipe}
+                        updateBackend={updateBackend}
                         selectedRecipe={selectedRecipe}
                         handleClose={handleRecipeClose}
                     />
