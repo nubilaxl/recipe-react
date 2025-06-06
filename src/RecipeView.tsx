@@ -16,7 +16,7 @@ export default function RecipeView(
         return <div>RecipeView
             <h3 className="recipe-heading mx-auto row">{selectedRecipe?.idMeal}  {selectedRecipe?.strMeal}</h3>
             <div className="row">
-            <img className="view-image col-md-6" src= {(selectedRecipe?.idMeal === "New") ? selectedRecipe?.strMealThumb : selectedRecipe?.strMealThumb + "/medium"} alt={selectedRecipe?.strMeal} />
+            <img  width={400} height={500}  className="view-image col-md-6" src= {(selectedRecipe?.idMeal === "New") ? selectedRecipe?.strMealThumb : selectedRecipe?.strMealThumb + "/medium"} alt={selectedRecipe?.strMeal} />
             
             <table className="ingredients  col-md-4">
               <tbody>

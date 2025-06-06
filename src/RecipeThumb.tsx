@@ -25,7 +25,7 @@ export default function RecipeThumb({recipe, onSelected, deleteRecipe,isSelected
         <button type="button" className="favorite" onClick={() => updateRecipeFavorite(recipe.id)}> {recipe.favorite ? '🩷' : '🩶'}</button>
         
         
-        <img src= {(recipe.idMeal === "New") ? recipe.strMealThumb : recipe.strMealThumb + "/small"}  alt="photo" onClick={() =>
+        <img  width={150} height={150}      src= {(recipe.idMeal === "New") ? recipe.strMealThumb : recipe.strMealThumb + "/small"}  alt="photo" onClick={() =>
                                 onSelected(recipe.id)
         }
         className={`border border-2 rounded-4 ${isSelected ? "border-primary" : "border-light"}`}
